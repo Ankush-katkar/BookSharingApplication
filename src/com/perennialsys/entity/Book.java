@@ -1,7 +1,5 @@
 package com.perennialsys.entity;
-
 import com.perennialsys.Owner;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,19 +9,12 @@ public class Book {
     private long isbn;
     private String name;
     private Set<String> authors;
-    private boolean isTaken;
-    private List<HoldRequest> holdRequests;
+    private boolean isTaken= false;
+
     private Owner owner;
-    private Date date;
 
-    public Date getDate() {
-        return date;
-    }
 
-    public Book setDate(Date date) {
-        this.date = date;
-        return this;
-    }
+
 
     @Override
     public int hashCode() {
@@ -51,6 +42,14 @@ public class Book {
 
     }
 
+    public boolean isTaken() {
+        return isTaken;
+    }
+
+    public void setTaken(boolean taken) {
+        isTaken = taken;
+    }
+
     public Set<String> getAuthors() {
         return authors;
     }
@@ -60,29 +59,36 @@ public class Book {
 
     }
 
-    public List<HoldRequest> getHoldRequests() {
-        return holdRequests;
-    }
-
-    public void setHoldRequests(List<HoldRequest> holdRequests) {
-        this.holdRequests = holdRequests;
-
-    }
 
     public void addNewBook(Book book) {
         this.isbn = book.isbn;
         this.name = book.name;
     }
 
-    public void displayBooks(ArrayList<Book> arr) {
-        for (Book book : arr) {
-            System.out.println("__________________________________________________________");
-            System.out.println("BookId\t\t\t\tBookName\t\t\t\tBookAuthor\t\t\t\tDate added\t\t\t\t");
-            System.out.println(book.isbn + "\t\t\t\t" + book.name + "\t\t\t\t" + book.authors + "\t\t\t\t" + book.date);
-            System.out.println("__________________________________________________________");
+    public Book(long isbn, String name, Set<String> authors, boolean isTaken, Owner owner, Date date) {
+        this.isbn = isbn;
+        this.name = name;
+        this.authors = authors;
+        this.isTaken = isTaken;
 
-        }
+        this.owner = owner;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "isbn=" + isbn +
+                ", name='" + name + '\'' +
+                ", authors=" + authors +
+                ", isTaken=" + isTaken +
+                ", owner=" + owner +
+                '}';
+    }
+
+
+
+
+
 
 
 }
