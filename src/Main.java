@@ -2,6 +2,7 @@ import com.perennialsys.entity.Book;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -40,7 +41,10 @@ public class Main {
                     Set<String>set = new HashSet<>();
                     System.out.println("Enter the author name ");
                     set.add(scanner.nextLine());
+                    book.setDate(new Date());
                      book.setAuthors(set);
+                     int hashcode =book.hashCode();
+                     System.out.println("Hashcode of book"+hashcode);
 
                     book.addNewBook(book);
                     listOfBooks.add(book);
