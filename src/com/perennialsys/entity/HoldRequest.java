@@ -8,4 +8,7 @@ public class HoldRequest {
     Owner owner;
     Book book;
     Date requestDate;
+
+    public boolean getBorrower() {
+    }
 }
