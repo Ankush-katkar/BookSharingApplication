@@ -11,7 +11,9 @@ import java.util.Scanner;
 public class BookStore {
 
     private static BookStore obj;
+    public int hold_request_expiry;
     ArrayList<Book> listOfBooks = new ArrayList<>();
+
     public static BookStore getInstance() {
         if (obj == null) {
             obj = new BookStore();
@@ -20,6 +22,14 @@ public class BookStore {
         return obj;
     }
 
+    public int getHoldRequestExpiry() {
+        return hold_request_expiry;
+    }
+
+    public BookStore setHold_request_expiry(int hold_request_expiry) {
+        this.hold_request_expiry = hold_request_expiry;
+        return this;
+    }
 
     public ArrayList<Book> searchForBooks() throws IOException {
         String choice;
@@ -40,12 +50,15 @@ public class BookStore {
         if (choice.equals("1")) {
             System.out.println("\nEnter the Name of the Book: ");
             name = reader.readLine();
-        }
-        if (choice.equals("2")) {
+        } else if (choice.equals("2")) {
+
             System.out.println("\nEnter the Author of the Book: ");
             author = reader.readLine();
         }
+
+
         ArrayList<Book> matchedBooks = new ArrayList();
+
         //Retrieving all the books which matched the user's search query
         for (int i = 0; i < listOfBooks.size(); i++) {
             Book b = listOfBooks.get(i);
@@ -53,7 +66,7 @@ public class BookStore {
             if (choice.equals("1")) {
                 if (b.getName().equals(name))
                     matchedBooks.add(b);
-            } if (choice.equals("2")) {
+            } else if (choice.equals("2")) {
                 if (b.getAuthors().equals(author))
                     matchedBooks.add(b);
             }
@@ -65,7 +78,7 @@ public class BookStore {
             System.out.println("\nThese books are found: \n");
 
             System.out.println("------------------------------------------------------------------------------");
-            System.out.println("No.\t\t\tName\t\t\tAuthors\t\t\tISBN");
+            System.out.println("No.\t\tName\t\t\tAuthors");
             System.out.println("------------------------------------------------------------------------------");
 
             for (int i = 0; i < matchedBooks.size(); i++) {
