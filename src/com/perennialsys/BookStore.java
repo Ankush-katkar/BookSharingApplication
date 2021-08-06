@@ -12,7 +12,6 @@ public class BookStore {
 
     private static BookStore obj;
     ArrayList<Book> listOfBooks = new ArrayList<>();
-
     public static BookStore getInstance() {
         if (obj == null) {
             obj = new BookStore();
