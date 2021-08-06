@@ -1,14 +1,41 @@
 package com.perennialsys.entity;
 
-import com.perennialsys.Owner;
-
 import java.util.Date;
 
 public class HoldRequest {
-    Owner owner;
+    Borrower borrower;
     Book book;
     Date requestDate;
 
-    public boolean getBorrower() {
+    public HoldRequest(Borrower bor, Book b, Date reqDate) {
+        borrower = bor;
+        book = b;
+        requestDate = reqDate;
+    }
+
+    public Borrower getBorrower() {
+        return borrower;
+    }
+
+    public void setBorrower(Borrower borrower) {
+        this.borrower = borrower;
+
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Date getRequestDate() {
+        return requestDate;
+    }
+
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
+
     }
 }

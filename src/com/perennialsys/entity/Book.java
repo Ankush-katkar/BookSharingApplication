@@ -1,27 +1,55 @@
 package com.perennialsys.entity;
+
 import com.perennialsys.Owner;
+
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 public class Book {
+    public String name;
+    public boolean isTaken;
+    public ArrayList<HoldRequest> holdRequests;
     private long isbn;
-    private String name;
     private Set<String> authors;
-    private boolean isTaken= false;
-
     private Owner owner;
 
+    public Book() {
+    }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + name + '\'' +
+                ", isTaken=" + isTaken +
+                ", holdRequests=" + holdRequests +
+                ", isbn=" + isbn +
+                ", authors=" + authors +
+                ", owner=" + owner +
+                '}';
+    }
 
+    public Book(long isbn, String name, Set<String> authors, boolean taken, Owner owner, Date date) {
+        this.isbn = isbn;
+        this.name = name;
+        this.authors = authors;
+        this.isTaken = taken;
+        this.holdRequests=new ArrayList<>();
+        this.owner = owner;
+    }
+
+    public ArrayList<HoldRequest> getHoldRequests() {
+        return holdRequests;
+    }
+
+    public Book setHoldRequests(ArrayList<HoldRequest> holdRequests) {
+        this.holdRequests = holdRequests;
+        return this;
+    }
 
     @Override
     public int hashCode() {
         return super.hashCode();
-    }
-
-    public Book() {
     }
 
     public long getIsbn() {
@@ -59,36 +87,10 @@ public class Book {
 
     }
 
-
     public void addNewBook(Book book) {
         this.isbn = book.isbn;
         this.name = book.name;
     }
-
-    public Book(long isbn, String name, Set<String> authors, boolean isTaken, Owner owner, Date date) {
-        this.isbn = isbn;
-        this.name = name;
-        this.authors = authors;
-        this.isTaken = isTaken;
-
-        this.owner = owner;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "isbn=" + isbn +
-                ", name='" + name + '\'' +
-                ", authors=" + authors +
-                ", isTaken=" + isTaken +
-                ", owner=" + owner +
-                '}';
-    }
-
-
-
-
-
 
 
 }
