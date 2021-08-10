@@ -5,10 +5,4 @@ import java.util.ArrayList;
 public class Borrower extends User {
 
 
-
-
-
-
-
-
 }

@@ -11,6 +11,7 @@ public abstract class User {
     private String name;
     private int contactNo;
     private ArrayList<HoldRequest> onHoldBooks;
+
     public User() {
     }
 

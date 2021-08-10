@@ -17,8 +17,7 @@ public class BookService {
     }
 
 
-
-    public void issuedBook(Borrower borrower,Book b) {
+     public synchronized void issuedBook(Borrower borrower,Book b) {
         Date today = new Date();
 
         ArrayList<HoldRequest> hRequests = b.holdRequests;

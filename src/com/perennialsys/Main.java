@@ -1,32 +1,33 @@
 package com.perennialsys;
-
 import com.perennialsys.entity.Book;
 import com.perennialsys.entity.Borrower;
+import com.perennialsys.entity.MyThread;
 import com.perennialsys.service.BookService;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-
-
 public class Main {
     static void menu() {
         System.out.println("1-Add new  book ");
         System.out.println("2-Display all book");
         System.out.println("3-Search  book");
-        System.out.println("4-Add new user");
+        System.out.println("4-Place Book on hold");
         System.out.println("5-Issue Book ");
         System.out.println("0-Exit");
     }
-
     public static void main(String[] args) throws IOException {
         int opt;
         BookStore b = new BookStore();
+        b.listOfBooks.add(new Book(123456,"pic", Collections.singleton("{dennis},{james}"),true));
+        b.listOfBooks.add(new Book(123457,"java", Collections.singleton(("james")),true));
 
         BookService bookService = new BookService();
         Borrower borrower = new Borrower();
+
         Scanner scanner = new Scanner(System.in);
 
         do {
@@ -35,9 +36,7 @@ public class Main {
             menu();
             opt = scanner.nextInt();
             switch (opt) {
-
-
-                case 1:
+              case 1:
                     scanner.nextLine();
                     System.out.println("Enter the book name");
                     book.setName(scanner.nextLine());
@@ -46,7 +45,6 @@ public class Main {
                     System.out.println("Enter the author name ");
                     set.add(scanner.nextLine());
                     //book.setDate(new Date());
-
                     book.setHoldRequests(new ArrayList<>());
                     book.setAuthors(set);
                     int hashcode = book.hashCode();
@@ -70,7 +68,7 @@ public class Main {
                 case 2:
                     for (Book book1 : b.listOfBooks) {
                         System.out.println("__________________________________________________________");
-                        System.out.println("BookId\t\tBookName\t\tBookAuthor\t\tDate added\t\t\t\t");
+                        System.out.println("BookName\t\t\tIsTaken\t\t\tHoldRequest\t\t\tBookIsbn\t\t\tAuthors\t\t\t\t");
                         System.out.println(book1);
                         System.out.println("__________________________________________________________");
 
@@ -81,23 +79,50 @@ public class Main {
                     b.searchForBooks();
                     break;
                 case 4:
+
+                   /* book.setHoldRequests(new ArrayList<>());
+                    book.setAuthors(set1);
+                    int hashcode1 = book.hashCode();
+                    book.setIsbn(hashcode1);*/
+                    //book.addNewBook(book);
+                   // b.listOfBooks.add(book);
+
+                ArrayList<Book> book1 = b.searchForBooks();
+                    for (Book p : book1) {
+                        System.out.println("book is here" + p);
+
+                        System.out.println("Enter the user id");
+                        borrower.setId(scanner.nextInt());
+                        scanner.nextLine();
+                        System.out.println("Enter the user name");
+                        borrower.setName(scanner.nextLine());
+                        borrower.setOnHoldBooks(new ArrayList<>());
+                        bookService.placeBookOnHold(borrower, p);
+                    }
+                    /*
                     System.out.println("Enter the user id");
                     borrower.setId(scanner.nextInt());
                     scanner.nextLine();
                     System.out.println("Enter the user name");
                     borrower.setName(scanner.nextLine());
-                    bookService.placeBookOnHold(borrower, book);
+                    */
+                    //bookService.placeBookOnHold(borrower, book);
                     break;
                 case 5:
+                    BookService obj = new BookService();//only one object
+                    MyThread t1=new MyThread(obj);
+                    t1.start();
+
+
+
+                    /*
                     System.out.println("Enter the book number");
                     book.setIsbn(scanner.nextInt());
                     scanner.nextLine();
                     System.out.println("Enter the book name");
                     book.setName(scanner.nextLine());
                     scanner.nextLine();
-
                     //book.setDate(new Date());
-
                     book.setHoldRequests(new ArrayList<>());
                     book.addNewBook(book);
                     b.listOfBooks.add(book);
@@ -109,6 +134,7 @@ public class Main {
                     borrower.setOnHoldBooks(new ArrayList<>());
 
                     bookService.issuedBook(borrower, book);
+*/
                     break;
                 default:
                     break;
