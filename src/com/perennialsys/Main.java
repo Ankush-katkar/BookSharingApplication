@@ -1,6 +1,7 @@
 package com.perennialsys;
 import com.perennialsys.entity.Book;
 import com.perennialsys.entity.Borrower;
+
 import com.perennialsys.entity.MyThread;
 import com.perennialsys.service.BookService;
 import java.io.IOException;
@@ -109,11 +110,16 @@ public class Main {
                     //bookService.placeBookOnHold(borrower, book);
                     break;
                 case 5:
-                    BookService obj = new BookService();//only one object
-                    MyThread t1=new MyThread(obj);
+                    BookService bs = new BookService();//only one object
+                    System.out.println("Enter the user id");
+                    borrower.setId(scanner.nextInt());
+                    scanner.nextLine();
+                    System.out.println("Enter the user name");
+                    borrower.setName(scanner.nextLine());
+                    borrower.setOnHoldBooks(new ArrayList<>());
+                    MyThread t1=new MyThread(bs,borrower, new Book(1,"pic", Collections.singleton("james"),true));
+
                     t1.start();
-
-
 
                     /*
                     System.out.println("Enter the book number");

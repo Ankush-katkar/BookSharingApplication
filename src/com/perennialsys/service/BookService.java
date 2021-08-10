@@ -41,6 +41,7 @@ public class BookService {
             System.out.println("Would you like to place the book on hold? (y/n)");
 
             Scanner sc = new Scanner(System.in);
+            sc.nextLine();
             String choice = sc.next();
 
             if (choice.equals("y")) {
