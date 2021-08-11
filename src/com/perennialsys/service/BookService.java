@@ -11,21 +11,16 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class BookService {
-
-
     public BookService() {
     }
 
-
-     public synchronized void issuedBook(Borrower borrower,Book b) {
+    public synchronized void issuedBook(Borrower borrower, Book b) {
         Date today = new Date();
 
         ArrayList<HoldRequest> hRequests = b.holdRequests;
 
 
-        for (int i = 0; i < hRequests.size(); i++) {
-            HoldRequest hr = hRequests.get(i);
-
+        for (HoldRequest hr : hRequests) {
             //Remove that hold request which has expired
             long days = ChronoUnit.DAYS.between(today.toInstant(), hr.getRequestDate().toInstant());
             days = 0 - days;
@@ -39,11 +34,8 @@ public class BookService {
         if (b.isTaken) {
             System.out.println("\nThe book " + b.name + " is already issued.");
             System.out.println("Would you like to place the book on hold? (y/n)");
-
-            Scanner sc = new Scanner(System.in);
-            sc.nextLine();
-            String choice = sc.next();
-
+            Scanner scanner = new Scanner(System.in);
+            String choice = scanner.nextLine();
             if (choice.equals("y")) {
                 makeHoldRequest(borrower);
             }
@@ -60,7 +52,7 @@ public class BookService {
                 if (hasRequest) {
 
                     if (b.holdRequests.get(0).getBorrower() == borrower)
-                        serviceHoldRequest(b.holdRequests.get(0),b);
+                        serviceHoldRequest(b.holdRequests.get(0), b);
 
                     else {
                         System.out.println("\nSorry some other users have requested for this book earlier than you. So you have to wait until their hold requests are processed.");
@@ -112,7 +104,7 @@ public class BookService {
 
     public void placeBookOnHold(Borrower bor, Book book) {
         HoldRequest hr = new HoldRequest(bor, book, new Date());
-        addHoldRequest(hr,book);
+        addHoldRequest(hr, book);
         bor.addHoldRequest(hr);
         System.out.println("\nThe book " + book.name + " has been successfully placed on hold by borrower " + bor.getName() + ".\n");
     }
